@@ -350,9 +350,9 @@ const userLogin = async (req, res, next) => {
       "7d"
     );
     res.cookie("accessToken", accessToken, {
-      httponly: true,
+      httponly: false,
       secure: process.env.APP_ENV === "development" ? false : true,
-      sameSite:"strict",
+      sameSite:"Lax",
       path:"/",
       maxage: 1000 * 60 * 60 * 24 * 7,
     });
