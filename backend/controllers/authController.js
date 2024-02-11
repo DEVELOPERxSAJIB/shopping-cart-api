@@ -350,10 +350,11 @@ const userLogin = async (req, res, next) => {
       "7d"
     );
     res.cookie("accessToken", accessToken, {
-      httponly: false,
-      secure: process.env.APP_ENV === "development" ? false : true,
+      httpOnly: true,
+      secure: true,
       sameSite: "strict",
-      maxage: 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      path: "/",
     });
 
     const userWithOutPass = await User.findOne({ email }).select("-password");
