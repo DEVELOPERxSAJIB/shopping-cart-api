@@ -7,19 +7,12 @@ const cookieParser = require("cookie-parser");
 const orderRoute = require("./routes/orderRoute");
 const cors = require("cors");
 const createError = require("http-errors");
-const rateLimit = require("express-rate-limit");
 const { errorResponse } = require("./controllers/responseController");
 const paymentRoute = require("./routes/paymentRoute");
 
 const app = express();
 
 // init JSON middleware for express
-const rateLimiter = rateLimit({
-  windowMS: 1 * 60 * 1000,
-  max: 50,
-  message: "Too many request from this IP",
-});
-app.use(rateLimiter);
 app.use(
   cors({
     origin: [

@@ -352,8 +352,7 @@ const userLogin = async (req, res, next) => {
     res.cookie("accessToken", accessToken, {
       httponly: false,
       secure: process.env.APP_ENV === "development" ? false : true,
-      sameSite:"Lax",
-      path:"/",
+      sameSite: "strict",
       maxage: 1000 * 60 * 60 * 24 * 7,
     });
 
