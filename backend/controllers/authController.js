@@ -350,24 +350,29 @@ const userLogin = async (req, res, next) => {
       "7d"
     );
 
-    res.cookie("accessToken", accessToken, {
-      httpOnly: false,
-      secure: process.env.APP_ENV === "development" ? false : true,
-      sameSite: "Lax",
-      maxAge: 1000 * 60 * 60 * 24 * 7,
-      path: "/",
-      domain : "shopping-cart-client-dun.vercel.app"
-    });
+    res
+      .cookie("accessToken", accessToken, {
+        httponly: false,
+        secure: true,
+        sameSite: "Lax",
+        path: "/",
+        maxage: 1000 * 60 * 60 * 24 * 7,
+      })
+      .status(200)
+      .json({
+        message: "Login successfull!",
+        payload: {
+          user,
+        },
+      });
 
-    const userWithOutPass = await User.findOne({ email }).select("-password");
-
-    successResponse(res, {
-      statusCode: 200,
-      message: "User successfully logged in",
-      payload: {
-        user: userWithOutPass,
-      },
-    });
+    // successResponse(res, {
+    //   statusCode: 200,
+    //   message: "User successfully logged in",
+    //   payload: {
+    //     user: user,
+    //   },
+    // });
   } catch (error) {
     next(error);
   }
