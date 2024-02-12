@@ -353,7 +353,7 @@ const userLogin = async (req, res, next) => {
     res
       .cookie("accessToken", accessToken, {
         secure: process.env.NODE_ENV === 'production' ? true : false,
-        maxage: 1000 * 60 * 60 * 24 * 7,
+        maxage: 1000 * 60 * 60 * 24 * 10,
       })
       .status(200)
       .json({
