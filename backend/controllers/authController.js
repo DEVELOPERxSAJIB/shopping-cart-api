@@ -349,12 +349,14 @@ const userLogin = async (req, res, next) => {
       process.env.JWT_ACCESS_KEY,
       "7d"
     );
+
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "strict",
+      secure: process.env.APP_ENV === development ? false : true,
+      sameSite: "Lax",
       maxAge: 1000 * 60 * 60 * 24 * 7,
       path: "/",
+      domain : "shopping-cart-client-dun.vercel.app"
     });
 
     const userWithOutPass = await User.findOne({ email }).select("-password");
