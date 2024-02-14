@@ -365,14 +365,6 @@ const userLogin = async (req, res, next) => {
           user,
         },
       });
-
-    // successResponse(res, {
-    //   statusCode: 200,
-    //   message: "User successfully logged in",
-    //   payload: {
-    //     user: user,
-    //   },
-    // });
   } catch (error) {
     next(error);
   }
