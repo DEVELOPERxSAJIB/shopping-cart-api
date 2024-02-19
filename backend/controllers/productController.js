@@ -393,9 +393,9 @@ const deleteProductReview = async (req, res, next) => {
   try {
     const { productId, reviewId } = req.body;
 
-    const product = await Product.findById(productId);
+    const product = await Product.findById(productId);    
 
-    if (product || product.reviews.length > 0) {
+    if (!product || product.reviews.length < 0) {
       throw createError(404, "Review not found");
     }
 
@@ -403,6 +403,10 @@ const deleteProductReview = async (req, res, next) => {
       (review) => review._id.toString() !== reviewId.toString()
     );
 
+    if (!reviews) {
+      throw createError(404, "Review not found with this Id");
+    }
+    
     const ratings =
       product.reviews.reduce((acc, item) => item.rating + acc, 0) /
       reviews.length;

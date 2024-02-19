@@ -19,8 +19,6 @@ const server = app.listen(PORT, () => {
   connectDatabase();
 });
 
-
-
 // hander server errors
 process.on("unhandledRejection", (err) => {
   console.log(`Error : ${err.message}`);

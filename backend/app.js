@@ -26,7 +26,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 // app routes
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/auth", authRoute);
